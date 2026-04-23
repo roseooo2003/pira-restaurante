@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIRA — Cocina a Leña · Mercedes, Buenos Aires</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='58' font-weight='700' fill='%23fff' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #000;
+      --bg2:    #0c0c0c;
+      --bg3:    #161616;
+      --white:  #fff;
+      --off:    #f0f0f0;
+      --muted:  #888;
+      --dim:    #555;
+      --border: #222;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 70px;
+      background: rgba(0,0,0,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--white);
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .82rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--white);
+      color: var(--bg);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .nav-cta:hover { background: var(--off); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      padding: 6px 18px;
+      border-radius: 99px;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 16vw, 11rem);
+      font-weight: 700;
+      letter-spacing: .1em;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: clamp(.85rem, 2vw, 1rem);
+      color: var(--muted);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 52px;
+    }
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--dim);
+      margin: 0 auto 52px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--white);
+      color: var(--bg);
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-primary:hover { background: var(--off); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 400;
+      letter-spacing: .07em;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color .2s, transform .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-secondary:hover { border-color: var(--dim); transform: translateY(-2px); }
+
+    /* ─── INSTAGRAM CARD ─── */
+    .ig-section {
+      padding: 80px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .ig-card {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .ig-avatar-wrap { position: relative; flex-shrink: 0; }
+    .ig-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .ig-info { min-width: 0; }
+    .ig-handle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .ig-location {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ig-stats {
+      display: flex;
+      gap: 36px;
+      margin-bottom: 16px;
+    }
+    .ig-stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+    .ig-stat-label {
+      font-size: .72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .ig-bio { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+    .ig-grid {
+      max-width: 860px;
+      margin: 32px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .ig-grid-item { aspect-ratio: 1; overflow: hidden; }
+    .ig-grid-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+      filter: grayscale(15%);
+    }
+    .ig-grid-item:hover img { transform: scale(1.06); filter: grayscale(0%); }
+
+    /* ─── CONCEPTO ─── */
+    .concepto {
+      padding: 100px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .concepto-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .concepto-text h2 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+    .concepto-text p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .fire-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 18px;
+      margin-top: 8px;
+      font-size: .78rem;
+      color: var(--off);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .concepto-visual { position: relative; }
+    .concepto-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    /* ─── GALERÍA ─── */
+    .galeria {
+      padding: 80px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      text-align: center;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--white);
+    }
+    .gallery-grid {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .gallery-grid .wide { grid-column: span 2; }
+    .gallery-item { overflow: hidden; border-radius: var(--radius); aspect-ratio: 1; }
+    .gallery-item.wide { aspect-ratio: 2/1; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease, filter .3s ease;
+      filter: grayscale(20%);
+    }
+    .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+
+    /* ─── REVIEWS ─── */
+    .reviews { padding: 100px 24px; }
+    .rating-summary {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .rating-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .rating-stars {
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: 5px;
+      margin: 10px 0 8px;
+    }
+    .rating-source { font-size: .78rem; color: var(--muted); }
+    .reviews-grid {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color .2s;
+    }
+    .review-card:hover { border-color: var(--dim); }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .review-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 600; font-size: .92rem; color: var(--white); }
+    .review-date { font-size: .75rem; color: var(--muted); }
+    .review-stars { color: var(--white); font-size: .95rem; margin-bottom: 12px; letter-spacing: 2px; }
+    .review-text { font-size: .88rem; color: var(--muted); line-height: 1.75; font-style: italic; }
+    .ta-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 36px;
+      font-size: .75rem;
+      color: var(--dim);
+    }
+    .ta-logo {
+      background: #34e0a1;
+      color: #000;
+      font-weight: 800;
+      font-size: .65rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* ─── INFO ─── */
+    .info-section {
+      padding: 80px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .info-grid {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+    .info-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--white);
+      letter-spacing: .04em;
+    }
+    .hours-list { list-style: none; }
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .hours-list li:last-child { border-bottom: none; }
+    .day { color: var(--off); font-weight: 500; }
+    .time { color: var(--muted); }
+    .closed { color: var(--dim); font-style: italic; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 34px; height: 34px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: .7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      display: block;
+    }
+    .contact-value {
+      color: var(--off);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .contact-value:hover { color: var(--white); }
+
+    /* ─── MAPA ─── */
+    .mapa-section { padding: 80px 24px; }
+    .mapa-wrap { max-width: 860px; margin: 0 auto; }
+    .mapa-embed {
+      width: 100%; height: 420px;
+      border: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: block;
+    }
+    .mapa-address {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      padding: 100px 24px;
+      text-align: center;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .cta-section p { font-size: 1rem; color: var(--muted); margin-bottom: 36px; }
+    .cta-phone {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+      margin-bottom: 32px;
+      text-decoration: none;
+      letter-spacing: .04em;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 36px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .14em;
+    }
+    .footer-text { font-size: .75rem; color: var(--dim); }
+    .footer-ig {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .82rem;
+      transition: color .2s;
+    }
+    .footer-ig:hover { color: var(--white); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .ig-card { grid-template-columns: 1fr; text-align: center; }
+      .ig-stats { justify-content: center; }
+      .ig-location { justify-content: center; }
+      .concepto { grid-template-columns: 1fr; gap: 40px; }
+      .concepto-visual { order: -1; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid .wide { grid-column: span 1; aspect-ratio: 1; }
+      .info-grid { grid-template-columns: 1fr; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── CARTA ─── */
+    .carta-section {
+      padding: 100px 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .carta-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+    .carta-header .section-label { margin-bottom: 12px; }
+    .carta-header .section-title { margin-bottom: 20px; }
+    .carta-price-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      padding: 10px 22px;
+      border-radius: 99px;
+      font-size: .82rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      margin-top: 8px;
+    }
+    .carta-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2px;
+    }
+    .carta-cat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+    }
+    .carta-cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .carta-items { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .carta-item { display: flex; flex-direction: column; gap: 2px; }
+    .carta-item-name {
+      font-size: .92rem;
+      font-weight: 500;
+      color: var(--off);
+      letter-spacing: .02em;
+    }
+    .carta-item-desc {
+      font-size: .78rem;
+      color: var(--dim);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    @media (max-width: 768px) {
+      .carta-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">PIRA</span>
+  <ul class="nav-links">
+    <li><a href="#concepto">Concepto</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#opiniones">Opiniones</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/542325469003?text=%C2%A1Hola%20PIRA!%0A%0AQuiero%20hacer%20una%20reserva.%0A%0AD%C3%ADa%3A%0ACantidad%20de%20comensales%3A%0AHora%3A%0AAclaraciones%3A%0A%0A%C2%A1Espero%20confirmaci%C3%B3n%20de%20mi%20reserva!%20%C2%A1Saludos!" target="_blank">Reservar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    🪵 Cocina exclusivamente a leña · Sin gas
+  </div>
+  <h1>PIRA</h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Mercedes · Buenos Aires · Argentina</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://wa.me/542325469003?text=%C2%A1Hola%20PIRA!%0A%0AQuiero%20hacer%20una%20reserva.%0A%0AD%C3%ADa%3A%0ACantidad%20de%20comensales%3A%0AHora%3A%0AAclaraciones%3A%0A%0A%C2%A1Espero%20confirmaci%C3%B3n%20de%20mi%20reserva!%20%C2%A1Saludos!" target="_blank">
+      📲 Reservar mesa
+    </a>
+    <a class="btn-secondary" href="#galeria">
+      Ver galería
+    </a>
+  </div>
+</section>
+
+<!-- INSTAGRAM CARD -->
+<section class="ig-section">
+  <div class="ig-card">
+    <div class="ig-avatar-wrap">
+      <img class="ig-avatar" src="profile.jpg" alt="PIRA Restaurante" />
+    </div>
+    <div class="ig-info">
+      <div class="ig-handle">PIRA</div>
+      <div class="ig-location">📍 Mercedes, Buenos Aires</div>
+      <div class="ig-stats">
+        <div class="ig-stat">
+          <span class="ig-stat-number">4.957</span>
+          <span class="ig-stat-label">Seguidores</span>
+        </div>
+        <div class="ig-stat">
+          <span class="ig-stat-number">162</span>
+          <span class="ig-stat-label">Publicaciones</span>
+        </div>
+        <div class="ig-stat">
+          <span class="ig-stat-number">4.7 ★</span>
+          <span class="ig-stat-label">Valoración</span>
+        </div>
+      </div>
+      <p class="ig-bio">Cocina contemporánea a leña en el corazón de Mercedes. Cada plato nace del fuego.</p>
+    </div>
+  </div>
+  <div class="ig-grid">
+    <div class="ig-grid-item"><img src="mia1.jpg" alt="PIRA plato" /></div>
+    <div class="ig-grid-item"><img src="mia3.jpg" alt="PIRA ambiente" /></div>
+    <div class="ig-grid-item"><img src="mia7.jpg" alt="PIRA cocina" /></div>
+    <div class="ig-grid-item"><img src="mia8.jpg" alt="PIRA clientes" /></div>
+    <div class="ig-grid-item"><img src="mia4.jpg" alt="PIRA producto" /></div>
+    <div class="ig-grid-item"><img src="mia9.jpg" alt="PIRA clientes" /></div>
+  </div>
+</section>
+
+<!-- CONCEPTO -->
+<section class="concepto" id="concepto">
+  <div class="concepto-text">
+    <h2>El fuego como<br/><em>único ingrediente</em></h2>
+    <p>
+      En PIRA cocinamos exclusivamente a leña. No hay gas. No hay atajos.
+      Cada plato pasa por el fuego real: la brasa, el humo, la llama.
+      Eso le da a nuestra cocina un sabor imposible de replicar.
+    </p>
+    <p>
+      Una carta acotada, pensada con cuidado, que cambia según la temporada
+      y los productos de la región.
+    </p>
+    <div class="fire-tag">
+      🪵 100% cocina a leña · Cero gas
+    </div>
+  </div>
+  <div class="concepto-visual">
+    <img class="concepto-img" src="post_4.jpg" alt="Cocina a leña PIRA" />
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="galeria" id="galeria">
+  <p class="section-label">Lo que sale de la leña</p>
+  <h2 class="section-title">Galería</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item wide"><img src="mia3.jpg" alt="PIRA ambiente" /></div>
+    <div class="gallery-item"><img src="mia1.jpg" alt="PIRA plato" /></div>
+    <div class="gallery-item"><img src="mia4.jpg" alt="PIRA producto" /></div>
+    <div class="gallery-item wide"><img src="mia7.jpg" alt="PIRA cocina" /></div>
+    <div class="gallery-item"><img src="mia2.jpg" alt="PIRA plato" /></div>
+    <div class="gallery-item wide"><img src="mia5.jpg" alt="PIRA plato" /></div>
+    <div class="gallery-item"><img src="mia6.jpg" alt="PIRA plato" /></div>
+    <div class="gallery-item wide"><img src="mia10.jpg" alt="PIRA fachada" /></div>
+  </div>
+</section>
+
+<!-- OPINIONES -->
+<section class="reviews" id="opiniones">
+  <p class="section-label">Lo que dicen los clientes</p>
+  <h2 class="section-title">Opiniones</h2>
+
+  <div class="rating-summary">
+    <div class="rating-number">4.7</div>
+    <div class="rating-stars">★★★★★</div>
+    <div class="rating-source">#14 de 38 restaurantes en Mercedes</div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">M</div>
+        <div>
+          <div class="review-name">Mabel B.</div>
+          <div class="review-date">Mayo 2024</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fuimos a cenar, nos gustó el ambiente, buena música, muy buena comida y EXCELENTE atención!!!!"</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">J</div>
+        <div>
+          <div class="review-name">Julieta A.</div>
+          <div class="review-date">Enero 2026</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Sorprendidos con el nivel de los platos. Las texturas, los sabores, la variedad. El pescado, los ñoquis de remolacha, los puerros con hojaldre y los postres: 10 puntos."</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">P</div>
+        <div>
+          <div class="review-name">Pablo S.</div>
+          <div class="review-date">Diciembre 2025</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">"Ambiente muy tranquilo y agradable. Carta acotada pero con una cocina muy buena, y la cantidad de comida en el plato es más que suficiente."</p>
+    </div>
+  </div>
+
+  <div class="ta-badge">
+    <span>Reseñas verificadas</span>
+    <span class="ta-logo">tripadvisor</span>
+  </div>
+</section>
+
+<!-- HORARIOS Y CONTACTO -->
+<section class="info-section" id="horarios">
+  <div class="info-grid">
+    <div class="info-block">
+      <h3>Horarios</h3>
+      <ul class="hours-list">
+        <li><span class="day">Lunes</span><span class="time closed">Cerrado</span></li>
+        <li><span class="day">Martes – Viernes</span><span class="time">20:00 – 00:00</span></li>
+        <li><span class="day">Sábado</span><span class="time">20:00 – 00:00</span></li>
+        <li><span class="day">Domingo</span><span class="time">12:00 – 16:00</span></li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h3>Contacto</h3>
+      <div class="contact-item">
+        <div class="contact-icon">📲</div>
+        <div>
+          <span class="contact-label">WhatsApp · Reservas</span>
+          <a class="contact-value" href="https://wa.me/542325469003?text=%C2%A1Hola%20PIRA!%0A%0AQuiero%20hacer%20una%20reserva.%0A%0AD%C3%ADa%3A%0ACantidad%20de%20comensales%3A%0AHora%3A%0AAclaraciones%3A%0A%0A%C2%A1Espero%20confirmaci%C3%B3n%20de%20mi%20reserva!%20%C2%A1Saludos!" target="_blank">+54 2325 46-9003</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <span class="contact-label">Dirección</span>
+          <span class="contact-value">Calle 16 esq. 15, Mercedes 6600, Bs. As.</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📸</div>
+        <div>
+          <span class="contact-label">Instagram</span>
+          <a class="contact-value" href="https://www.instagram.com/pira.restaurante/" target="_blank">@pira.restaurante</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="mapa-section" id="ubicacion">
+  <div class="mapa-wrap">
+    <p class="section-label" style="text-align:left;margin-bottom:10px;">Cómo llegar</p>
+    <h2 class="section-title" style="text-align:left;margin-bottom:24px;">Ubicación</h2>
+    <iframe
+      class="mapa-embed"
+      src="https://maps.google.com/maps?q=-34.6551638,-59.4263865&z=17&output=embed"
+      allowfullscreen
+      loading="lazy"
+      title="PIRA Restaurante — Calle 16 esq. 15, Mercedes">
+    </iframe>
+    <div class="mapa-address">
+      <span>📍</span>
+      <span>Calle 16 esquina 15 · Mercedes 6600 · Buenos Aires · Argentina</span>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section class="carta-section" id="carta">
+  <div class="carta-header">
+    <p class="section-label">Lo que cocinamos</p>
+    <h2 class="section-title">Nuestra Carta</h2>
+  </div>
+
+  <div class="carta-grid">
+
+    <!-- ENTRADAS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Entradas</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Bruschetta</span><span class="carta-item-desc">De tomate asado, chorizo colorado y mozzarella.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Mutabal</span><span class="carta-item-desc">Puré de berenjenas asadas con tahini, ajo, limón y aceite de oliva. Acompañado con zanahorias y remolachas asadas finalizadas con praline de almendras.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Sardina a la gallega</span><span class="carta-item-desc">Al horno con sal, pimienta, limón, aceite de oliva y pimentón.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Puerro asado en hojaldre</span><span class="carta-item-desc">Sobre masa de hojaldre casera, crema de calabaza y reducción de aceto.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Ceviche de atún rojo</span><span class="carta-item-desc">Atún rojo curado con limón, leche de tigre, salsa de ají amarillo, batatas, maíz de cancha y cilantro.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Empanada de pescado y langostinos</span><span class="carta-item-desc">Rellenas de pescado blanco, langostinos, cebolla, ajo, puerro y crema.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Empanada de carne</span><span class="carta-item-desc">Carne picada, zanahoria, ajo, comino y pimentón.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Provoleta</span><span class="carta-item-desc">Con queso parrillero y verduras asadas.</span></li>
+      </ul>
+    </div>
+
+    <!-- AL HORNO DE LEÑA -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Al Horno de Leña</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Pecho de novillo ahumado con puré de papa y pesto de rúcula</span></li>
+        <li class="carta-item"><span class="carta-item-name">Vacío con papas al horno</span><span class="carta-item-desc">Con salsa de hongos de pino y papas al horno de leña.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Milanesa de bife de chorizo</span><span class="carta-item-desc">Al horno de leña.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Pastel de papa</span><span class="carta-item-desc">Gratinado al horno.</span></li>
+      </ul>
+    </div>
+
+    <!-- PESCADOS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Pescados</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Trucha con crema de puerro</span><span class="carta-item-desc">Al horno de leña con crema de puerro.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Pacú al horno</span><span class="carta-item-desc">Con salsa criolla.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Arroz con calamaretis</span><span class="carta-item-desc">Arroz cremoso con calamaretis salteados.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Lenguado al roquefort con puré de papas</span><span class="carta-item-desc">Con langostinos y mejillones.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Tacos de calamaretis</span><span class="carta-item-desc">Calamaretis y cebolla morada sobre tortilla de maíz con salsa típica de la gastronomía peruana.</span></li>
+      </ul>
+    </div>
+
+    <!-- PARRILLA -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Parrilla</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Bondiola a la cerveza negra</span><span class="carta-item-desc">A las brasas con salsa de cerveza negra, mostaza, cebolla y miel.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Asado de tira</span><span class="carta-item-desc">A las brasas.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Matambre a la pizza</span><span class="carta-item-desc">A las brasas.</span></li>
+      </ul>
+    </div>
+
+    <!-- SARTÉN -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Sartén</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Goulash con spaetzle y crema ácida</span><span class="carta-item-desc">Estofado de carne de origen húngaro con paprika, cebolla, sal y pimienta.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Saltimboca a la romana</span><span class="carta-item-desc">Paillard de lomo, jamón crudo y salvia.</span></li>
+      </ul>
+    </div>
+
+    <!-- WOK -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Wok</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Wok de vegetales, arroz yamaní y salsa teriyaki</span></li>
+        <li class="carta-item"><span class="carta-item-name" style="color:var(--muted);font-size:.8rem;">Con lomo · langostinos · vegetales</span></li>
+      </ul>
+    </div>
+
+    <!-- PASTAS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Pastas</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Ravioles de verdura</span><span class="carta-item-desc">Rellenos de verduras de estación.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Sorrentinos de jamón y queso</span><span class="carta-item-desc">Rellenos de jamón y queso.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Sorrentinos de pollo y hongos</span><span class="carta-item-desc">Rellenos de pollo y hongos.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Canelones de verdura y carne</span><span class="carta-item-desc">Rellenos de verdura y carne, gratinados al horno.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Ñoquis de papa</span><span class="carta-item-desc">Caseros de papa.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Espaguetis de sémola</span><span class="carta-item-desc">Caseros de sémola.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Espaguetis con mejillones a la provenzal</span><span class="carta-item-desc">Con mejillones, ajo, tomate y perejil.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Malfattis de remolacha con crema de puerro</span><span class="carta-item-desc">Pasta rústica de remolacha sobre crema de puerro.</span></li>
+      </ul>
+      <p class="carta-item-desc" style="margin-top:16px;">Salsas: tomate · scarparo · bolognesa · marinera</p>
+    </div>
+
+    <!-- GUARNICIONES -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Guarniciones</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Papas al horno · Batatas caramelizadas · Zapallo al horno · Puré de papas · Ensalada de zanahoria y huevo · Ensalada de rúcula, tomate y queso · Ensalada mixta (lechuga, tomate y cebolla)
+      </p>
+    </div>
+
+    <!-- POSTRES -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Postres</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Helado de queso e higos en almíbar</span><span class="carta-item-desc">Helado de queso azul con higos en almíbar.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Crumble de manzana con helado de vainilla</span><span class="carta-item-desc">Manzanas caramelizadas al horno cubiertas con cremado de manteca.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Sandwich helado de chocolate</span><span class="carta-item-desc">Tapa de brownie casero con relleno de helado de chocolate.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Bocha de helado</span><span class="carta-item-desc">Artesanal.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Tiramisú</span><span class="carta-item-desc">Casero.</span></li>
+        <li class="carta-item"><span class="carta-item-name">Flan casero con dulce de leche o crema</span></li>
+      </ul>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Bebidas</h3>
+      <ul class="carta-items">
+        <li class="carta-item"><span class="carta-item-name">Aguas · Gaseosas · Jugos</span></li>
+        <li class="carta-item"><span class="carta-item-name">Jarra de limonada</span></li>
+        <li class="carta-item"><span class="carta-item-name">Cerveza Heineken 1lt · 500ml</span></li>
+        <li class="carta-item"><span class="carta-item-name">Cerveza Imperial Roja · Negra 500ml</span></li>
+      </ul>
+    </div>
+
+    <!-- TRAGOS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Tragos</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Gin Tonic · Aperol · Vermú · Cynar · Gancia · Fernet · Cinzano · Whisky
+      </p>
+    </div>
+
+    <!-- VINOS TINTOS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Vinos Tintos</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Familia Gascon Malbec · DV Catena Exploratore Malbec · DV Catena Pinot Noir · Escorihuela Gascon Malbec · Sur de Los Andes Reserva Pinot Noir · Humberto Canale Estate Malbec · Humberto Canale Estate Pinot Noir · Alambrado Cabernet Franc · Manos Negras Cabernet Sauvignon · DV Catena Cabernet Malbec · Azul Cabernet
+      </p>
+    </div>
+
+    <!-- VINOS BLANCOS -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Vinos Blancos</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Familia Gascon Chardonnay · DV Catena Chardonnay · Platelli Sweet · Finca Gabriel · Finca Las Nubes Torrontés · Escorihuela Gran Reserva Chardonnay
+      </p>
+    </div>
+
+    <!-- ROSADO Y ESPUMANTES -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Rosado · Espumantes</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Sur de Los Andes Rosé · Saint Felicien Nature · Cruzat Premier Extra Brut
+      </p>
+    </div>
+
+    <!-- INFUSIONES -->
+    <div class="carta-cat">
+      <h3 class="carta-cat-title">Infusiones</h3>
+      <p class="carta-item-name" style="line-height:2;">
+        Té · Café · Cortado · Lágrima
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA RESERVAS -->
+<section class="cta-section">
+  <p class="section-label">¿Listo para vivir la experiencia?</p>
+  <h2>Reservá tu mesa</h2>
+  <p>Escribinos por WhatsApp y te confirmamos en minutos.</p>
+  <a class="cta-phone" href="https://wa.me/542325469003?text=%C2%A1Hola%20PIRA!%0A%0AQuiero%20hacer%20una%20reserva.%0A%0AD%C3%ADa%3A%0ACantidad%20de%20comensales%3A%0AHora%3A%0AAclaraciones%3A%0A%0A%C2%A1Espero%20confirmaci%C3%B3n%20de%20mi%20reserva!%20%C2%A1Saludos!" target="_blank">+54 2325 46-9003</a>
+  <a class="btn-primary" href="https://wa.me/542325469003?text=%C2%A1Hola%20PIRA!%0A%0AQuiero%20hacer%20una%20reserva.%0A%0AD%C3%ADa%3A%0ACantidad%20de%20comensales%3A%0AHora%3A%0AAclaraciones%3A%0A%0A%C2%A1Espero%20confirmaci%C3%B3n%20de%20mi%20reserva!%20%C2%A1Saludos!" target="_blank">
+    💬 Abrir WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">PIRA</span>
+  <span class="footer-text">Mercedes, Buenos Aires · Cocina a Leña</span>
+  <a class="footer-ig" href="https://www.instagram.com/pira.restaurante/" target="_blank">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    @pira.restaurante
+  </a>
+</footer>
+
+</body>
+</html>
