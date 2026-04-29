@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PIRA — Tarjeta de mesa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #1a1a1a;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-family: 'Inter', sans-serif;
+  }
+  .card {
+    width: 600px;
+    height: 600px;
+    background: #000000;
+    color: #ffffff;
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 18px; left: 18px; right: 18px; bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.10);
+    pointer-events: none;
+  }
+  .brand {
+    text-align: center;
+  }
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 46px;
+    letter-spacing: 0.42em;
+    padding-left: 0.42em;
+    color: #ffffff;
+    line-height: 1;
+  }
+  .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    color: #888;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .rule {
+    width: 44px;
+    height: 1px;
+    background: #ffffff;
+    opacity: 0.7;
+  }
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38px;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+  .copy {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #c8c8c8;
+    line-height: 1.6;
+    max-width: 320px;
+    letter-spacing: 0.02em;
+  }
+  .qr-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .qr-block .frame {
+    width: 130px;
+    height: 130px;
+    background: #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-block img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .qr-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    padding-left: 0.32em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+  .footer {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    padding-left: 0.45em;
+    color: #666;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">
+      <div class="wordmark">PIRA</div>
+      <div class="sub">Restaurante</div>
+    </div>
+
+    <div class="middle">
+      <div class="rule"></div>
+      <div class="headline">¿Te gustó?</div>
+      <div class="copy">Tu reseña ayuda a que más gente nos descubra. Te lleva 30 segundos.</div>
+    </div>
+
+    <div class="qr-row">
+      <div class="qr-block">
+        <div class="frame"><img src="https://raw.githubusercontent.com/roseooo2003/pira-restaurante/main/qr-tarjeta/qr-google.png" alt="Google"></div>
+        <div class="qr-label">Google</div>
+      </div>
+      <div class="qr-block">
+        <div class="frame"><img src="https://raw.githubusercontent.com/roseooo2003/pira-restaurante/main/qr-tarjeta/qr-tripadvisor.png" alt="TripAdvisor"></div>
+        <div class="qr-label">TripAdvisor</div>
+      </div>
+    </div>
+
+    <div class="footer">Mercedes &middot; Buenos Aires</div>
+  </div>
+</body>
+</html>
