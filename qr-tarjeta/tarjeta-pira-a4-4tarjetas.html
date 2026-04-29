@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PIRA — A4 con 4 tarjetas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #ffffff;
+    width: 210mm;
+    height: 297mm;
+    font-family: 'Inter', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    padding: 13.5mm 15mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6mm;
+  }
+  .card {
+    width: 87mm;
+    height: 132mm;
+    background: #ffffff;
+    color: #000000;
+    padding: 10mm 8mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    page-break-inside: avoid;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 3mm; left: 3mm; right: 3mm; bottom: 3mm;
+    border: 0.4mm solid #000000;
+    pointer-events: none;
+  }
+  .crop {
+    position: absolute;
+    width: 4mm;
+    height: 4mm;
+    border-color: #000;
+    pointer-events: none;
+  }
+  .crop.tl { top: -1mm; left: -1mm; border-top: 0.2mm solid; border-left: 0.2mm solid; }
+  .crop.tr { top: -1mm; right: -1mm; border-top: 0.2mm solid; border-right: 0.2mm solid; }
+  .crop.bl { bottom: -1mm; left: -1mm; border-bottom: 0.2mm solid; border-left: 0.2mm solid; }
+  .crop.br { bottom: -1mm; right: -1mm; border-bottom: 0.2mm solid; border-right: 0.2mm solid; }
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 32pt;
+    letter-spacing: 0.42em;
+    padding-left: 0.42em;
+    color: #000000;
+    line-height: 1;
+  }
+  .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 6.5pt;
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    color: #000000;
+    margin-top: 3mm;
+    text-transform: uppercase;
+  }
+  .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5mm;
+  }
+  .rule {
+    width: 12mm;
+    height: 0.3mm;
+    background: #000000;
+  }
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26pt;
+    color: #000000;
+    line-height: 1.05;
+  }
+  .copy {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 8pt;
+    color: #000000;
+    line-height: 1.55;
+    max-width: 60mm;
+    letter-spacing: 0.02em;
+  }
+  .qr-row {
+    display: flex;
+    gap: 6mm;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2mm;
+  }
+  .qr-block .frame {
+    width: 26mm;
+    height: 26mm;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-block img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .qr-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 6pt;
+    letter-spacing: 0.32em;
+    padding-left: 0.32em;
+    color: #000000;
+    text-transform: uppercase;
+  }
+  .footer {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 5.5pt;
+    letter-spacing: 0.45em;
+    padding-left: 0.45em;
+    color: #000000;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <!-- Card 1 -->
+  <div class="card">
+    <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+    <div>
+      <div class="wordmark">PIRA</div>
+      <div class="sub">Restaurante</div>
+    </div>
+    <div class="middle">
+      <div class="rule"></div>
+      <div class="headline">¿Te gustó?</div>
+      <div class="copy">Tu reseña ayuda a que más gente nos descubra. Te lleva 30 segundos.</div>
+    </div>
+    <div class="qr-row">
+      <div class="qr-block">
+        <div class="frame"><img src="qr-google.png" alt="Google"></div>
+        <div class="qr-label">Google</div>
+      </div>
+      <div class="qr-block">
+        <div class="frame"><img src="qr-tripadvisor.png" alt="TripAdvisor"></div>
+        <div class="qr-label">TripAdvisor</div>
+      </div>
+    </div>
+    <div class="footer">Mercedes &middot; Buenos Aires</div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card">
+    <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+    <div>
+      <div class="wordmark">PIRA</div>
+      <div class="sub">Restaurante</div>
+    </div>
+    <div class="middle">
+      <div class="rule"></div>
+      <div class="headline">¿Te gustó?</div>
+      <div class="copy">Tu reseña ayuda a que más gente nos descubra. Te lleva 30 segundos.</div>
+    </div>
+    <div class="qr-row">
+      <div class="qr-block">
+        <div class="frame"><img src="qr-google.png" alt="Google"></div>
+        <div class="qr-label">Google</div>
+      </div>
+      <div class="qr-block">
+        <div class="frame"><img src="qr-tripadvisor.png" alt="TripAdvisor"></div>
+        <div class="qr-label">TripAdvisor</div>
+      </div>
+    </div>
+    <div class="footer">Mercedes &middot; Buenos Aires</div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card">
+    <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+    <div>
+      <div class="wordmark">PIRA</div>
+      <div class="sub">Restaurante</div>
+    </div>
+    <div class="middle">
+      <div class="rule"></div>
+      <div class="headline">¿Te gustó?</div>
+      <div class="copy">Tu reseña ayuda a que más gente nos descubra. Te lleva 30 segundos.</div>
+    </div>
+    <div class="qr-row">
+      <div class="qr-block">
+        <div class="frame"><img src="qr-google.png" alt="Google"></div>
+        <div class="qr-label">Google</div>
+      </div>
+      <div class="qr-block">
+        <div class="frame"><img src="qr-tripadvisor.png" alt="TripAdvisor"></div>
+        <div class="qr-label">TripAdvisor</div>
+      </div>
+    </div>
+    <div class="footer">Mercedes &middot; Buenos Aires</div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card">
+    <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+    <div>
+      <div class="wordmark">PIRA</div>
+      <div class="sub">Restaurante</div>
+    </div>
+    <div class="middle">
+      <div class="rule"></div>
+      <div class="headline">¿Te gustó?</div>
+      <div class="copy">Tu reseña ayuda a que más gente nos descubra. Te lleva 30 segundos.</div>
+    </div>
+    <div class="qr-row">
+      <div class="qr-block">
+        <div class="frame"><img src="qr-google.png" alt="Google"></div>
+        <div class="qr-label">Google</div>
+      </div>
+      <div class="qr-block">
+        <div class="frame"><img src="qr-tripadvisor.png" alt="TripAdvisor"></div>
+        <div class="qr-label">TripAdvisor</div>
+      </div>
+    </div>
+    <div class="footer">Mercedes &middot; Buenos Aires</div>
+  </div>
+</div>
+</body>
+</html>
