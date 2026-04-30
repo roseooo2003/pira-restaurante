@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PIRA — Plantillas de Reels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1080px 1920px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .frame {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    color: #fff;
+    background: #1a1a1a;
+  }
+  .frame:last-child { page-break-after: auto; }
+
+  /* Photo placeholder — dark gradient with subtle texture */
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.04), transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.03), transparent 60%),
+      linear-gradient(180deg, #2a2a2a 0%, #0e0e0e 100%);
+  }
+  .photo-tag {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.4em;
+    padding-left: 0.4em;
+    text-transform: uppercase;
+    pointer-events: none;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Top + bottom gradients to ensure text legibility over any media */
+  .grad-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 480px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+  }
+  .grad-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 720px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  /* Brand wordmark top */
+  .brand {
+    position: absolute;
+    top: 110px; left: 0; right: 0;
+    text-align: center;
+    z-index: 5;
+  }
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 60px;
+    letter-spacing: 0.42em;
+    padding-left: 0.42em;
+    color: #fff;
+    line-height: 1;
+  }
+  .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    color: #fff;
+    margin-top: 16px;
+    text-transform: uppercase;
+  }
+
+  /* Bottom content stack */
+  .stack {
+    position: absolute;
+    left: 80px; right: 80px;
+    bottom: 160px;
+    z-index: 5;
+    text-align: center;
+  }
+  .rule {
+    width: 80px;
+    height: 1px;
+    background: #fff;
+    margin: 0 auto 36px;
+  }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .display {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+  .display.italic { font-style: italic; }
+  .display.small { font-size: 72px; }
+  .body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.45;
+    color: #f0f0f0;
+    max-width: 760px;
+    margin: 0 auto 28px;
+    letter-spacing: 0.01em;
+  }
+  .footer {
+    position: absolute;
+    bottom: 70px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    color: #aaa;
+    text-transform: uppercase;
+    z-index: 5;
+  }
+
+  /* Pull-quote big quotation */
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 200px;
+    line-height: 0.4;
+    color: #fff;
+    opacity: 0.4;
+    margin-bottom: 30px;
+  }
+  .attribution {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    padding-left: 0.4em;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 36px;
+  }
+  .stars {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: #fff;
+    letter-spacing: 12px;
+    margin: 24px 0;
+  }
+
+  /* Date hero (event template) */
+  .date-hero {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 240px;
+    line-height: 0.95;
+    color: #fff;
+    text-align: center;
+  }
+  .date-month {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  /* Centered layout for "frase del chef" */
+  .center-stack {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+    z-index: 5;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- TEMPLATE 1 — PLATO DEL DÍA / PLATO NUEVO    -->
+<!-- ============================================ -->
+<div class="frame">
+  <div class="photo-bg"></div>
+  <div class="photo-tag">FOTO O VIDEO<br>DEL PLATO AQUÍ</div>
+  <div class="grad-top"></div>
+  <div class="grad-bottom"></div>
+
+  <div class="brand">
+    <div class="wordmark">PIRA</div>
+    <div class="sub">Restaurante</div>
+  </div>
+
+  <div class="stack">
+    <div class="kicker">Del horno · Hoy</div>
+    <div class="rule"></div>
+    <div class="display italic">Pecho ahumado<br>14 horas</div>
+    <div class="body">Cocción lenta sobre brasas de quebracho. Servido con mostaza ahumada y verduras del huerto.</div>
+  </div>
+
+  <div class="footer">Mercedes &middot; Reservas en bio</div>
+</div>
+
+<!-- ============================================ -->
+<!-- TEMPLATE 2 — RESEÑA DESTACADA               -->
+<!-- ============================================ -->
+<div class="frame">
+  <div class="photo-bg"></div>
+  <div class="photo-tag">FOTO AMBIENTE<br>O PLATO DE FONDO</div>
+  <div class="grad-top"></div>
+  <div class="grad-bottom" style="height: 1100px"></div>
+
+  <div class="brand">
+    <div class="wordmark">PIRA</div>
+    <div class="sub">Restaurante</div>
+  </div>
+
+  <div class="center-stack" style="justify-content: flex-end; padding-bottom: 220px">
+    <div class="quote-mark">"</div>
+    <div class="display italic small">Una experiencia<br>inolvidable. El fuego<br>se nota en cada plato.</div>
+    <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="attribution">— María G. · Google</div>
+  </div>
+
+  <div class="footer">Gracias por confiar en nosotros</div>
+</div>
+
+<!-- ============================================ -->
+<!-- TEMPLATE 3 — DETRÁS DEL FUEGO (cinematográfico) -->
+<!-- ============================================ -->
+<div class="frame">
+  <div class="photo-bg"></div>
+  <div class="photo-tag">VIDEO DEL HORNO<br>O DE LAS BRASAS</div>
+  <div class="grad-top" style="height: 380px"></div>
+  <div class="grad-bottom" style="height: 540px"></div>
+
+  <div class="brand">
+    <div class="wordmark">PIRA</div>
+    <div class="sub">Restaurante</div>
+  </div>
+
+  <div class="stack" style="bottom: 220px">
+    <div class="rule"></div>
+    <div class="display italic">El fuego<br>no miente.</div>
+    <div class="kicker" style="margin-top: 40px; font-size: 16px">Cocina a leña · Mercedes</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- TEMPLATE 4 — EVENTO / FECHA ESPECIAL        -->
+<!-- ============================================ -->
+<div class="frame">
+  <div class="photo-bg"></div>
+  <div class="photo-tag">FOTO MOOD<br>O DETALLE DE MESA</div>
+  <div class="grad-top"></div>
+  <div class="grad-bottom" style="height: 900px"></div>
+
+  <div class="brand">
+    <div class="wordmark">PIRA</div>
+    <div class="sub">Restaurante</div>
+  </div>
+
+  <div class="center-stack" style="justify-content: flex-end; padding-bottom: 200px">
+    <div class="kicker">Cena especial</div>
+    <div class="date-hero">15</div>
+    <div class="date-month">Mayo · Sábado · 21 hs</div>
+    <div class="rule" style="margin-top: 56px"></div>
+    <div class="display italic small" style="margin-top: 20px">Noche de leña<br>y vinos naturales</div>
+    <div class="body">Menú de 5 pasos · Cupos limitados</div>
+  </div>
+
+  <div class="footer">Reservas por WhatsApp</div>
+</div>
+
+<!-- ============================================ -->
+<!-- TEMPLATE 5 — FRASE DEL CHEF / MANIFIESTO    -->
+<!-- ============================================ -->
+<div class="frame" style="background: #000">
+  <div class="brand">
+    <div class="wordmark">PIRA</div>
+    <div class="sub">Restaurante</div>
+  </div>
+
+  <div class="center-stack">
+    <div class="kicker">Cocina de autor</div>
+    <div class="rule" style="margin-bottom: 56px; margin-top: 12px"></div>
+    <div class="display italic" style="font-size: 84px">Cocinamos<br>como se cocinaba<br>antes del apuro.</div>
+    <div class="rule" style="margin: 56px auto 36px"></div>
+    <div class="attribution">Mariano Pira · Chef</div>
+  </div>
+
+  <div class="footer">Mercedes &middot; Buenos Aires</div>
+</div>
+
+</body>
+</html>
